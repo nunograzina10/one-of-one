@@ -703,12 +703,26 @@ footer{
 .strip-item:nth-child(3n)  {animation:tickerFlick 7s linear infinite 5.5s}
 
 /* Respect reduced motion */
+
+/* Outcome line flicker */
+.wout{
+  animation:woutFlick 9s linear infinite;
+}
+.wcard:nth-child(2) .wout{animation-delay:3s}
+.wcard:nth-child(3) .wout{animation-delay:6s}
+@keyframes woutFlick{
+  0%,96%,100%{text-shadow:none}
+  97%         {text-shadow:1px 0 var(--pink),-1px 0 var(--cyan)}
+  98%         {text-shadow:-1px 0 var(--pink),1px 0 var(--cyan)}
+  99%         {text-shadow:none}
+}
 @media(prefers-reduced-motion:reduce){
   .glitch::before,.glitch::after,
   .glitch-sm::before,.glitch-sm::after,
   .glitch-heading::before,.glitch-heading::after,
   .stat-v::before,.stat-v::after{animation:none!important}
   .strip-item{animation:none!important}
+  .wout{animation:none!important}
 }
 
 </style>
@@ -777,26 +791,26 @@ footer{
 <!-- WORK -->
 <section id="work" class="s s-work">
   <div class="s-inner">
-    <div class="mono-tag reveal">Past work</div>
+    <div class="mono-tag reveal"><span class="glitch-sm" data-text="Past work">Past work</span></div>
     <h2 class="sh reveal reveal-d1"><span class="glitch-heading" data-text="Every one, different">Every one, different</span></h2>
     <p class="si reveal reveal-d2">Every project on this list was shaped by constraints no standard framework could anticipate. That's the point. we're comfortable working without a template.</p>
 
     <div class="work-split">
       <!-- B2B column -->
       <div class="work-col reveal reveal-d2">
-        <div class="work-col-label"><div class="wcl-dot wcl-dot-b2b"></div>B2B deep tech: where the specific constraint is everything</div>
+        <div class="work-col-label"><div class="wcl-dot wcl-dot-b2b"></div><span class="glitch-sm" data-text="B2B deep tech: where the specific constraint is everything">B2B deep tech: where the specific constraint is everything</span></div>
         <div class="work-cards">
 
           <div class="wcard">
             <div class="wtag"><div class="wdot wdot-b"></div>Govtech · Enterprise · Regulated</div>
-            <div class="wtitle">Biometric identity at scale</div>
+            <div class="wtitle"><span class="glitch-heading" data-text="Biometric identity at scale">Biometric identity at scale</span></div>
             <p class="wdesc">The constraint that made this one-of-one: a single false match is a diplomatic incident. We defined the product model for automated biometric verification across international airports. translating government compliance into operator software where the UX had to be fast enough for real throughput and rigorous enough for zero tolerance.</p>
             <div class="wout">Deployed at border control worldwide</div>
           </div>
 
           <div class="wcard">
             <div class="wtag"><div class="wdot wdot-b"></div>Fintech · AI-powered · B2B SaaS</div>
-            <div class="wtitle">AI fraud prevention platform</div>
+            <div class="wtitle"><span class="glitch-heading" data-text="AI fraud prevention platform">AI fraud prevention platform</span></div>
             <p class="wdesc">The constraint: the product had to make a machine-learning black box legible to analysts under time pressure. We worked on AI-powered fraud detection for global banks. building tooling where the UX carried the weight of explaining model confidence to people whose decisions had real consequences.</p>
             <div class="wout">Protecting transactions at global scale</div>
           </div>
@@ -806,26 +820,26 @@ footer{
 
       <!-- B2C column -->
       <div class="work-col reveal reveal-d3">
-        <div class="work-col-label"><div class="wcl-dot wcl-dot-b2c"></div>B2C consumer: where the community dynamic defines the product</div>
+        <div class="work-col-label"><div class="wcl-dot wcl-dot-b2c"></div><span class="glitch-sm" data-text="B2C consumer: where the community dynamic defines the product">B2C consumer: where the community dynamic defines the product</span></div>
         <div class="work-cards">
 
           <div class="wcard">
             <div class="wtag"><div class="wdot wdot-c"></div>Sport tech · Social · Millions of users</div>
-            <div class="wtitle">Sports community app</div>
+            <div class="wtitle"><span class="glitch-heading" data-text="Sports community app">Sports community app</span></div>
             <p class="wdesc">The constraint: a community that cares obsessively about accuracy, and a free-to-premium model that had to feel respectful of both. We worked on one of the world's top-ranked sports apps: GPS, social scoreboards, handicaps, where the product had to be as precise as the sport it served.</p>
             <div class="wout">Top-ranked in category globally</div>
           </div>
 
           <div class="wcard">
             <div class="wtag"><div class="wdot wdot-c"></div>E-commerce · Social commerce · MENA</div>
-            <div class="wtitle">Fashion & social commerce</div>
+            <div class="wtitle"><span class="glitch-heading" data-text="Fashion & social commerce">Fashion & social commerce</span></div>
             <p class="wdesc">The constraint: social commerce in a market where cultural nuance is the product. We led discovery, localisation, and growth feature work for a fashion marketplace entering MENA. A wrong assumption about user context wasn't a UX problem there, it was a brand problem.</p>
             <div class="wout">Fashion retail across MENA</div>
           </div>
 
           <div class="wcard">
             <div class="wtag"><div class="wdot wdot-c"></div>Travel & sport · Zero-to-one · Community</div>
-            <div class="wtitle">Endurance athlete platform</div>
+            <div class="wtitle"><span class="glitch-heading" data-text="Endurance athlete platform">Endurance athlete platform</span></div>
             <p class="wdesc">The constraint: a community that would see through anything inauthentic, and a zero-to-one fog with no existing playbook to copy. We built from concept through prototype for an endurance athlete platform. discovery, opportunity framing, onboarding, checkout. shaped entirely around how this specific community thinks.</p>
             <div class="wout">Global race and event discovery</div>
           </div>
@@ -838,7 +852,7 @@ footer{
     <div class="work-cta-row reveal reveal-d4">
       <div class="work-cta-text">
         <div class="cta-eyebrow">Your company · next</div>
-        <h3>What makes yours unlike anything else?</h3>
+        <h3><span class="glitch-heading" data-text="What makes yours unlike anything else?">What makes yours unlike anything else?</span></h3>
         <p>Tell us the specific constraint. the regulatory wall, the community dynamic, the zero-to-one fog. Tell us and we'll be honest about how we'd approach it.</p>
       </div>
       <a href="#contact" class="btn-p" style="flex-shrink:0">Start a conversation <span class="arr">→</span></a>
@@ -850,43 +864,43 @@ footer{
 <!-- SERVICES -->
 <section id="services" class="s s-services">
   <div class="s-inner">
-    <div class="mono-tag reveal">Services</div>
-    <h2 class="sh reveal reveal-d1">Shaped to fit your product</h2>
+    <div class="mono-tag reveal"><span class="glitch-sm" data-text="Services">Services</span></div>
+    <h2 class="sh reveal reveal-d1"><span class="glitch-heading" data-text="Shaped to fit your product">Shaped to fit your product</span></h2>
     <p class="si reveal reveal-d2">Every engagement is scoped from scratch. Your roadmap has its own logic. The help that fits your situation will look different from the help that fit the last one.</p>
     <div class="svc-list reveal reveal-d2">
       <div class="svc-row">
         <div class="svc-idx">01</div>
-        <div class="svc-title">Product strategy &amp; positioning</div>
+        <div class="svc-title"><span class="glitch-sm" data-text="Product strategy &amp; positioning">Product strategy &amp; positioning</span></div>
         <div class="svc-desc">Clarify what you're building, for whom, and why it wins in your specific market. Market framing, competitive analysis, and a north star grounded in what actually makes your situation different.</div>
         <div class="svc-tag">strategy</div>
       </div>
       <div class="svc-row">
         <div class="svc-idx">02</div>
-        <div class="svc-title">Discovery &amp; user research</div>
+        <div class="svc-title"><span class="glitch-sm" data-text="Discovery &amp; user research">Discovery &amp; user research</span></div>
         <div class="svc-desc">Structured research to find the problems worth solving. Interview plans, synthesis, and an opportunity space you can act on and execute from.</div>
         <div class="svc-tag">discovery</div>
       </div>
       <div class="svc-row">
         <div class="svc-idx">03</div>
-        <div class="svc-title">Roadmap &amp; prioritisation</div>
+        <div class="svc-title"><span class="glitch-sm" data-text="Roadmap &amp; prioritisation">Roadmap &amp; prioritisation</span></div>
         <div class="svc-desc">Turning competing ideas into a coherent plan. Stakeholder alignment, scoring models grounded in data, and a roadmap your engineers will actually follow.</div>
         <div class="svc-tag">planning</div>
       </div>
       <div class="svc-row">
         <div class="svc-idx">04</div>
-        <div class="svc-title">Interim / embedded PM</div>
+        <div class="svc-title"><span class="glitch-sm" data-text="Interim / embedded PM">Interim / embedded PM</span></div>
         <div class="svc-desc">We join your team for a defined period: parental cover, between hires, or a critical launch. We work exactly as an internal PM would.</div>
         <div class="svc-tag">embedded</div>
       </div>
       <div class="svc-row">
         <div class="svc-idx">05</div>
-        <div class="svc-title">PM team coaching</div>
+        <div class="svc-title"><span class="glitch-sm" data-text="PM team coaching">PM team coaching</span></div>
         <div class="svc-desc">Level up a team growing faster than its processes. Discovery habits, stakeholder communication, practical skills that stick beyond the engagement.</div>
         <div class="svc-tag">coaching</div>
       </div>
       <div class="svc-row">
         <div class="svc-idx">06</div>
-        <div class="svc-title">AI product integration</div>
+        <div class="svc-title"><span class="glitch-sm" data-text="AI product integration">AI product integration</span></div>
         <div class="svc-desc">Find where AI creates genuine value in your specific product context. The right features, the right evals, built around what your users actually need from it.</div>
         <div class="svc-tag">AI-native</div>
       </div>
@@ -897,36 +911,36 @@ footer{
 <!-- PROCESS -->
 <section id="process" class="s s-process">
   <div class="s-inner">
-    <div class="mono-tag reveal">How it works</div>
-    <h2 class="sh reveal reveal-d1">Your situation first,<br>our tools second</h2>
+    <div class="mono-tag reveal"><span class="glitch-sm" data-text="How it works">How it works</span></div>
+    <h2 class="sh reveal reveal-d1"><span class="glitch-heading" data-text="Your situation first,">Your situation first,</span><br><span class="glitch-heading" data-text="our tools second">our tools second</span></h2>
     <p class="si reveal reveal-d2">We start by understanding what makes your product, team, and market specific. Then we figure out which tools and methods actually apply.</p>
     <div class="proc-grid">
       <div class="proc-steps">
         <div class="proc-step reveal">
           <div class="proc-num">01</div>
           <div>
-            <div class="proc-title">Scoping call (free)</div>
+            <div class="proc-title"><span class="glitch-sm" data-text="Scoping call (free)">Scoping call (free)</span></div>
             <p class="proc-desc">30 minutes on what makes your situation specific. We'll be direct about whether we're the right fit and what genuinely good help looks like for your specific situation.</p>
           </div>
         </div>
         <div class="proc-step reveal reveal-d1">
           <div class="proc-num">02</div>
           <div>
-            <div class="proc-title">Proposal with clear deliverables</div>
+            <div class="proc-title"><span class="glitch-sm" data-text="Proposal with clear deliverables">Proposal with clear deliverables</span></div>
             <p class="proc-desc">Written scope, timeline, and a fixed or day-rate price. Shaped to what your engagement actually needs.</p>
           </div>
         </div>
         <div class="proc-step reveal reveal-d2">
           <div class="proc-num">03</div>
           <div>
-            <div class="proc-title">Focused engagement</div>
+            <div class="proc-title"><span class="glitch-sm" data-text="Focused engagement">Focused engagement</span></div>
             <p class="proc-desc">We work inside your tools, your team, your cadence. Because the product is yours. We're just here to help you build it better.</p>
           </div>
         </div>
         <div class="proc-step reveal reveal-d3">
           <div class="proc-num">04</div>
           <div>
-            <div class="proc-title">Handoff that lands</div>
+            <div class="proc-title"><span class="glitch-sm" data-text="Handoff that lands">Handoff that lands</span></div>
             <p class="proc-desc">Everything documented so your team can execute without us. Available for questions after the engagement closes.</p>
           </div>
         </div>
@@ -952,7 +966,7 @@ footer{
 <!-- ABOUT -->
 <section id="about" class="s s-about">
   <div class="s-inner">
-    <div class="mono-tag reveal">About</div>
+    <div class="mono-tag reveal"><span class="glitch-sm" data-text="About">About</span></div>
     <div class="about-grid">
       <div>
         <h2 class="sh reveal reveal-d1" style="margin-bottom:2rem"><span class="glitch-heading" data-text="Every product is">Every product is</span><br><span class="glitch-heading" data-text="one-of-one">one-of-one</span></h2>
@@ -975,8 +989,8 @@ footer{
   <div class="s-inner">
     <div class="contact-grid">
       <div>
-        <div class="mono-tag reveal">Contact</div>
-        <h2 class="contact-h reveal reveal-d1"><span class="glitch-heading" data-text="Your product is one-of-one.">Your product is one-of-one.</span><br><span class="ia">Treat it that way.</span></h2>
+        <div class="mono-tag reveal"><span class="glitch-sm" data-text="Contact">Contact</span></div>
+        <h2 class="contact-h reveal reveal-d1"><span class="glitch-heading" data-text="Your product is one-of-one.">Your product is one-of-one.</span><br><span class="ia glitch" data-text="Treat it that way.">Treat it that way.</span></h2>
         <p class="contact-p reveal reveal-d2">Tell us what makes your situation specific. We'll tell you honestly whether we're the right fit, and what good help would actually look like, whether that's us or not.</p>
         <div class="cmeta reveal reveal-d3">
           <div class="cmrow"><div class="cmtag">email</div><div class="cmval">hello@one-of-one.pm</div></div>
