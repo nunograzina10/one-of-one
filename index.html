@@ -555,6 +555,162 @@ footer{
   footer{padding:1.5rem}
   h1{font-size:2.8rem}
 }
+
+/* ── GLITCH SYSTEM ── */
+
+/* Glitch on the h1 hero headline */
+.glitch{
+  position:relative;
+  display:inline-block;
+}
+.glitch::before,
+.glitch::after{
+  content:attr(data-text);
+  position:absolute;
+  inset:0;
+  background:transparent;
+  overflow:hidden;
+  clip-path:inset(0 0 100% 0);
+}
+.glitch::before{
+  color:var(--pink);
+  animation:glitchTop 5s var(--ease-io) infinite;
+  text-shadow:2px 0 var(--pink);
+}
+.glitch::after{
+  color:var(--cyan);
+  animation:glitchBot 5s var(--ease-io) infinite .15s;
+  text-shadow:-2px 0 var(--cyan);
+}
+@keyframes glitchTop{
+  0%,88%,100%{clip-path:inset(0 0 100% 0);transform:translate(0)}
+  89%         {clip-path:inset(0 0 60% 0); transform:translate(-3px,0);opacity:.8}
+  90%         {clip-path:inset(20% 0 55% 0);transform:translate(3px,0)}
+  91%         {clip-path:inset(40% 0 40% 0);transform:translate(-2px,0)}
+  92%         {clip-path:inset(0 0 80% 0); transform:translate(0)}
+  93%,94%     {clip-path:inset(0 0 100% 0);transform:translate(0)}
+  95%         {clip-path:inset(10% 0 70% 0);transform:translate(2px,0);opacity:.7}
+  96%         {clip-path:inset(0 0 100% 0);transform:translate(0)}
+}
+@keyframes glitchBot{
+  0%,88%,100%{clip-path:inset(100% 0 0 0);transform:translate(0)}
+  89%         {clip-path:inset(60% 0 0 0); transform:translate(3px,0);opacity:.8}
+  90%         {clip-path:inset(55% 0 20% 0);transform:translate(-3px,0)}
+  91%         {clip-path:inset(40% 0 30% 0);transform:translate(2px,0)}
+  92%         {clip-path:inset(80% 0 0 0); transform:translate(0)}
+  93%,94%     {clip-path:inset(100% 0 0 0);transform:translate(0)}
+  95%         {clip-path:inset(70% 0 10% 0);transform:translate(-2px,0);opacity:.7}
+  96%         {clip-path:inset(100% 0 0 0);transform:translate(0)}
+}
+
+/* Glitch on the nav logo word — faster, more subtle */
+.glitch-sm{position:relative;display:inline-block}
+.glitch-sm::before,
+.glitch-sm::after{
+  content:attr(data-text);
+  position:absolute;inset:0;
+  background:transparent;overflow:hidden;
+  clip-path:inset(0 0 100% 0);
+  font-family:inherit;font-size:inherit;font-weight:inherit;
+  letter-spacing:inherit;
+}
+.glitch-sm::before{
+  color:var(--pink);
+  animation:glitchSmTop 8s linear infinite 2s;
+}
+.glitch-sm::after{
+  color:var(--cyan);
+  animation:glitchSmBot 8s linear infinite 2.1s;
+}
+@keyframes glitchSmTop{
+  0%,94%,100%{clip-path:inset(0 0 100% 0);transform:translate(0)}
+  95%         {clip-path:inset(0 0 55% 0);transform:translate(-2px,0)}
+  96%         {clip-path:inset(30% 0 50% 0);transform:translate(2px,0)}
+  97%         {clip-path:inset(0 0 100% 0);transform:translate(0)}
+}
+@keyframes glitchSmBot{
+  0%,94%,100%{clip-path:inset(100% 0 0 0);transform:translate(0)}
+  95%         {clip-path:inset(55% 0 0 0);transform:translate(2px,0)}
+  96%         {clip-path:inset(50% 0 30% 0);transform:translate(-2px,0)}
+  97%         {clip-path:inset(100% 0 0 0);transform:translate(0)}
+}
+
+/* RGB channel split on section headings — fires on .visible */
+.glitch-heading{position:relative;display:inline-block}
+.glitch-heading::before,
+.glitch-heading::after{
+  content:attr(data-text);
+  position:absolute;inset:0;
+  background:transparent;overflow:hidden;
+  clip-path:inset(0 0 100% 0);
+  white-space:nowrap;
+}
+.glitch-heading::before{
+  color:var(--pink);
+  animation:none;
+}
+.glitch-heading::after{
+  color:var(--cyan);
+  animation:none;
+}
+.reveal.visible .glitch-heading::before{
+  animation:headingGlitch 6s var(--ease-io) infinite;
+}
+.reveal.visible .glitch-heading::after{
+  animation:headingGlitch 6s var(--ease-io) infinite .12s;
+}
+@keyframes headingGlitch{
+  0%,90%,100%{clip-path:inset(0 0 100% 0);transform:translate(0)}
+  91%         {clip-path:inset(0 0 50% 0);transform:translate(-3px,0)}
+  92%         {clip-path:inset(30% 0 45% 0);transform:translate(3px,0)}
+  93%         {clip-path:inset(0 0 100% 0);transform:translate(0)}
+  94%         {clip-path:inset(10% 0 65% 0);transform:translate(-2px,0)}
+  95%         {clip-path:inset(0 0 100% 0);transform:translate(0)}
+}
+
+/* Stat value glitch on hover */
+.stat-v{position:relative;display:inline-block}
+.stat-v::before,
+.stat-v::after{
+  content:attr(data-text);
+  position:absolute;inset:0;
+  background:transparent;overflow:hidden;
+  clip-path:inset(0 0 100% 0);
+  white-space:nowrap;
+  font-family:var(--fd);font-size:inherit;font-weight:inherit;letter-spacing:inherit;
+}
+.stat-v::before{color:var(--pink)}
+.stat-v::after {color:var(--cyan)}
+.stat:hover .stat-v::before{animation:statGlitch 0.5s var(--ease-io) forwards}
+.stat:hover .stat-v::after {animation:statGlitch 0.5s var(--ease-io) .07s forwards}
+@keyframes statGlitch{
+  0%  {clip-path:inset(0 0 100% 0);transform:translate(0)}
+  20% {clip-path:inset(0 0 45% 0);transform:translate(-3px,0)}
+  40% {clip-path:inset(25% 0 40% 0);transform:translate(3px,0)}
+  60% {clip-path:inset(50% 0 20% 0);transform:translate(-2px,0)}
+  80% {clip-path:inset(70% 0 5% 0);transform:translate(1px,0)}
+  100%{clip-path:inset(0 0 100% 0);transform:translate(0)}
+}
+
+/* Ticker item glitch flicker — random items get a brief RGB split */
+@keyframes tickerFlick{
+  0%,97%,100%{text-shadow:none;transform:translate(0)}
+  98%         {text-shadow:1px 0 var(--pink),-1px 0 var(--cyan);transform:translate(1px,0)}
+  99%         {text-shadow:-1px 0 var(--pink),1px 0 var(--cyan);transform:translate(-1px,0)}
+}
+.strip-item:nth-child(3n+1){animation:tickerFlick 7s linear infinite 1s}
+.strip-item:nth-child(3n+2){animation:tickerFlick 7s linear infinite 3.5s}
+.strip-item:nth-child(3n)  {animation:tickerFlick 7s linear infinite 5.5s}
+
+/* Respect reduced motion */
+@media(prefers-reduced-motion:reduce){
+  .glitch::before,.glitch::after,
+  .glitch-sm::before,.glitch-sm::after,
+  .glitch-heading::before,.glitch-heading::after,
+  .stat-v::before,.stat-v::after{animation:none!important}
+  .strip-item{animation:none!important}
+}
+
 </style>
 </head>
 <body>
@@ -568,7 +724,7 @@ footer{
       <circle class="tp-dw" cx="2"  cy="22" r="2.5"/>
       <circle class="tp-dc" cx="24" cy="22" r="2.5"/>
     </svg>
-    one-of-one
+    <span class="glitch-sm" data-text="one-of-one">one-of-one</span>
   </a>
   <div class="nav-r">
     <a href="#work"     class="nav-link">work</a>
@@ -585,7 +741,7 @@ footer{
   <div class="hero-inner">
     <div class="hero-left">
       <div class="hero-pill"><div class="hero-pill-dot"></div>Built for products with no blueprint</div>
-      <h1>Your product<br>is <span class="hl">one-of-one.</span></h1>
+      <h1>Your product<br>is <span class="hl glitch" data-text="one-of-one.">one-of-one.</span></h1>
       <p class="hero-sub">No two products face the same market, the same team, or the same constraints. Every product faces a different market, a different team, different constraints. We build the strategy, process, and delivery model around yours.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn-p">Request a quote <span class="arr">→</span></a>
@@ -622,7 +778,7 @@ footer{
 <section id="work" class="s s-work">
   <div class="s-inner">
     <div class="mono-tag reveal">Past work</div>
-    <h2 class="sh reveal reveal-d1">Every one, different</h2>
+    <h2 class="sh reveal reveal-d1"><span class="glitch-heading" data-text="Every one, different">Every one, different</span></h2>
     <p class="si reveal reveal-d2">Every project on this list was shaped by constraints no standard framework could anticipate. That's the point. we're comfortable working without a template.</p>
 
     <div class="work-split">
@@ -799,16 +955,16 @@ footer{
     <div class="mono-tag reveal">About</div>
     <div class="about-grid">
       <div>
-        <h2 class="sh reveal reveal-d1" style="margin-bottom:2rem">Every product is<br>one-of-one</h2>
+        <h2 class="sh reveal reveal-d1" style="margin-bottom:2rem"><span class="glitch-heading" data-text="Every product is">Every product is</span><br><span class="glitch-heading" data-text="one-of-one">one-of-one</span></h2>
         <p class="about-p reveal reveal-d2">one-of-one started from a simple belief: every product is shaped by forces no framework fully accounts for. The regulatory wall that changes the whole business model. The community dynamic that breaks every growth playbook. The technical constraint that makes the obvious solution impossible. These aren't edge cases. They're the actual job.</p>
         <p class="about-p reveal reveal-d3">We've worked across biometric deep tech, AI-powered fintech, social commerce, sports community apps, and endurance platforms. Not to check verticals off a list. but because each one forced us to think differently. That range is what lets us walk into your specific situation without assuming we already know the answer.</p>
         <p class="about-p reveal reveal-d4"><strong>Based in Lisbon.</strong> Working remotely or on-site across Europe and globally. Each engagement built around your timeline, team, and tools. Not ours.</p>
       </div>
       <div class="stats reveal reveal-d2">
-        <div class="stat"><div class="stat-v">10<span class="ia">+</span></div><div class="stat-l">years in product</div></div>
-        <div class="stat"><div class="stat-v">5</div><div class="stat-l">industries shipped</div></div>
-        <div class="stat"><div class="stat-v">B2B <span class="ia">&</span> B2C</div><div class="stat-l">both sides of the market</div></div>
-        <div class="stat"><div class="stat-v">0<span class="ia">→</span>1</div><div class="stat-l">and 1→N at scale</div></div>
+        <div class="stat"><div class="stat-v" data-text="10+">10<span class="ia">+</span></div><div class="stat-l">years in product</div></div>
+        <div class="stat"><div class="stat-v" data-text="5">5</div><div class="stat-l">industries shipped</div></div>
+        <div class="stat"><div class="stat-v" data-text="B2B & B2C">B2B <span class="ia">&</span> B2C</div><div class="stat-l">both sides of the market</div></div>
+        <div class="stat"><div class="stat-v" data-text="0→1">0<span class="ia">→</span>1</div><div class="stat-l">and 1→N at scale</div></div>
       </div>
     </div>
   </div>
@@ -820,7 +976,7 @@ footer{
     <div class="contact-grid">
       <div>
         <div class="mono-tag reveal">Contact</div>
-        <h2 class="contact-h reveal reveal-d1">Your product is one-of-one.<br><span class="ia">Treat it that way.</span></h2>
+        <h2 class="contact-h reveal reveal-d1"><span class="glitch-heading" data-text="Your product is one-of-one.">Your product is one-of-one.</span><br><span class="ia">Treat it that way.</span></h2>
         <p class="contact-p reveal reveal-d2">Tell us what makes your situation specific. We'll tell you honestly whether we're the right fit, and what good help would actually look like, whether that's us or not.</p>
         <div class="cmeta reveal reveal-d3">
           <div class="cmrow"><div class="cmtag">email</div><div class="cmval">hello@one-of-one.pm</div></div>
