@@ -535,6 +535,10 @@ option{background:#12121C}
 .sbtn:hover{background:var(--indigoh);transform:translateY(-2px);box-shadow:0 8px 24px rgba(108,0,255,0.35)}
 .sbtn .arr{transition:transform .22s var(--ease-out)}
 .sbtn:hover .arr{transform:translateX(4px)}
+.sbtn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.sbtn:disabled:hover{background:var(--indigo);box-shadow:none}
+.ferror{display:none;font-family:var(--fb);font-size:13px;color:var(--pink);line-height:1.6;margin-top:-.4rem}
+.ferror.on{display:block}
 .fsuccess{display:none;background:rgba(18,18,28,0.96);border:1px solid rgba(0,229,255,0.2);padding:2.5rem}
 .fsuccess.on{display:block}
 .fsuccess-top{display:flex;align-items:center;gap:10px;margin-bottom:.75rem;font-family:var(--fm);font-size:10px;color:var(--cyan);letter-spacing:.12em}
@@ -1026,7 +1030,9 @@ footer{
           </div>
           <div class="fg"><label>Ideal timeline</label><input id="ft" placeholder="e.g. July 2026, or ASAP"></div>
           <div class="fg"><label>Tell us about the challenge</label><textarea id="fm" rows="4" placeholder="What makes your product situation unlike anything else? The constraint, the team gap, the market oddity. Whatever it is, that's where we start."></textarea></div>
-          <button class="sbtn" onclick="handleSubmit()">Tell us what makes yours different <span class="arr">→</span></button>
+          <input type="text" id="fbot" name="botcheck" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off">
+          <button class="sbtn" id="sbtn" onclick="handleSubmit()">Tell us what makes yours different <span class="arr">→</span></button>
+          <p class="ferror" id="ferror">Something went wrong sending your message. Please email us directly at hello@one-of-one.pm.</p>
         </div>
         <div class="fsuccess" id="fsuccess">
           <div class="fsuccess-top">message received</div>
@@ -1120,12 +1126,70 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 
 // Form
-function handleSubmit(){
-  const n=document.getElementById('fn').value.trim();
-  const e=document.getElementById('fe').value.trim();
+// Sends the contact form to hello@one-of-one.pm via Web3Forms (no backend needed for a static site).
+// Get a free access key at https://web3forms.com (email verification only, no password/account)
+// and paste it below in place of WEB3FORMS_ACCESS_KEY.
+const WEB3FORMS_ACCESS_KEY = "746af9ae-3867-40ac-919d-82340e789aa4";
+
+async function handleSubmit(){
+  const btn = document.getElementById('sbtn');
+  const err = document.getElementById('ferror');
+  const n = document.getElementById('fn').value.trim();
+  const e = document.getElementById('fe').value.trim();
+  const c = document.getElementById('fc').value.trim();
+  const s = document.getElementById('fs').value;
+  const t = document.getElementById('ft').value.trim();
+  const m = document.getElementById('fm').value.trim();
+  const bot = document.getElementById('fbot').value;
+
+  err.classList.remove('on');
   if(!n||!e){alert('Please enter your name and email.');return;}
-  document.getElementById('cform').style.display='none';
-  document.getElementById('fsuccess').classList.add('on');
+  if(bot) return; // honeypot tripped, silently drop
+
+  const subject = `New inquiry from ${n}${c ? ' · ' + c : ''} — one-of-one`;
+  const body = [
+    `Name: ${n}`,
+    `Email: ${e}`,
+    c ? `Company: ${c}` : null,
+    s ? `Service: ${s}` : null,
+    t ? `Ideal timeline: ${t}` : null,
+    '',
+    'Challenge:',
+    m || '(not provided)'
+  ].filter(x => x !== null).join('\n');
+
+  const originalLabel = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = 'Sending…';
+
+  try{
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: subject,
+        from_name: 'one-of-one website',
+        replyto: e,
+        name: n,
+        email: e,
+        company: c,
+        service: s,
+        timeline: t,
+        message: body,
+        botcheck: bot
+      })
+    });
+    const data = await res.json();
+    if(!data.success) throw new Error(data.message || 'Submission failed');
+
+    document.getElementById('cform').style.display = 'none';
+    document.getElementById('fsuccess').classList.add('on');
+  }catch(_err){
+    btn.disabled = false;
+    btn.innerHTML = originalLabel;
+    err.classList.add('on');
+  }
 }
 </script>
 
